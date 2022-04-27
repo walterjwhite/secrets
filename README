@@ -1,0 +1,7 @@
+Provides CLI utility to interact with secrets
+    find
+    get
+    put
+    delete
+
+relies on openssl for encryption of data and git for storage of secrets
