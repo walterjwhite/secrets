@@ -24,7 +24,7 @@ _TEMP_SECRET=$(mktemp)
 openssl rsautl -decrypt -in $_KEY/value -out $_TEMP_SECRET -inkey _APPLICATION_DATA_PATH_/keys/private
 
 if [ -z "$_OUT" ]; then
-	cat $_TEMP_SECRET | xsel -ib
+	cat $_TEMP_SECRET | $_COPY_CMD
 else
 	cat $_TEMP_SECRET
 fi
