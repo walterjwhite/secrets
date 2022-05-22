@@ -13,7 +13,7 @@ fi
 
 # initialize git repository
 if [ ! -e _APPLICATION_DATA_PATH_/store ]; then
-	git clone $_SECRETS_REPOSITORY _APPLICATION_DATA_PATH_/store
+	git clone $_CONF_SECRETS_REPOSITORY _APPLICATION_DATA_PATH_/store
 fi
 
 cd _APPLICATION_DATA_PATH_/store
