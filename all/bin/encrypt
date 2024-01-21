@@ -1,0 +1,18 @@
+#!/bin/sh
+
+import git:install/file.sh
+import encrypt.sh
+import decrypt.sh
+
+which gpg >/dev/null 2>&1 || _error "gpg not found, gpg is required to encrypt/decrypt files"
+
+_require "$_SECRETS_TARGET" _SECRETS_TARGET
+_require_file "$_SECRETS_TARGET"
+
+if [ $(printf '%s' "$_SECRETS_TARGET" | $_CONF_INSTALL_GNU_GREP -Pc '(\.asc$|\.gpg$)') -gt 0 ]; then
+	_ENCRYPTION_ACTION=decrypt
+else
+	_ENCRYPTION_ACTION=encrypt
+fi
+
+_secrets_$_ENCRYPTION_ACTION "$@"
