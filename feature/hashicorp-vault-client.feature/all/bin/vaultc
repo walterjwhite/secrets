@@ -1,0 +1,16 @@
+#!/bin/sh
+
+import hashicorp-vault-client/vault.sh
+
+_vault_auth || {
+	_error "Error authenticating"
+}
+
+case $1 in
+list)
+	_vault_list $2
+	;;
+*)
+	_error "Unknown action: $2"
+	;;
+esac

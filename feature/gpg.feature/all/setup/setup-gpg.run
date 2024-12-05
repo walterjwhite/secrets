@@ -1,0 +1,21 @@
+#!/bin/sh
+
+_setup_gnu_pg() {
+  _detail "Initializing GPG"
+
+  gpg --full-generate-key
+  
+  _FEATURE_GPG_USER_EMAIL=$(gpg --list-keys | grep @ | awk {'print$5'} | sed -e 's/<//' -e 's/>//')
+  printf '_FEATURE_GPG_USER_EMAIL=%s\n\n' "$_FEATURE_GPG_USER_EMAIL" >> $_CONF_INSTALL_APPLICATION_CONFIG_PATH
+}
+
+which gpg >/dev/null 2>&1
+if [ $? -gt 0 ]; then
+  _error "gpg not found, gpg is required for secrets"
+else
+  if [ ! -e ~/.gnupg ]; then
+    _setup_gnu_pg
+  else
+    _warn 'GPG is already confgured'
+  fi
+fi
